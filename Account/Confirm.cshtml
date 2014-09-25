@@ -1,0 +1,9 @@
+﻿@{
+    var token = Request["token"];
+
+    if(WebSecurity.ConfirmAccount(token)){
+        <h1>Account Confirmed</h1>
+        <p>You may now begin to use your account.</p>
+        <p><a href="@Href("~/App/HomePage.cshtml")">Login</a></p>
+    }
+}

@@ -1,0 +1,188 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 0;
+	margin-bottom: 0;
+	min-height: 100%;
+	background-color: #ffffff;
+}
+
+.text {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #000000;
+}
+
+#center {
+	background-color: #ffffff;
+	width: 640px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#pageHeader {
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*Fix for border showing in IE9*/
+a img{
+	border:0;
+}
+
+p {
+	text-align: justify;
+	font-size: 13px;
+}
+
+.imgIcons:hover {
+	opacity: 0.7;
+}
+
+.buttons {
+	border: 1px solid #000000;
+	border-radius: 5px; 
+}
+
+.buttons:hover {
+	color: #ffffff;
+	border: 1px solid #6A0002;
+	background-color: #6A0002;
+}
+
+.textBottomLeft {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.textBottomRight {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+#mailTo:hover {
+	color: #5882FA;
+}
+
+.title {
+	text-align: center;
+	font-size: 30px;
+	height: 30px;
+	font-variant: small-caps;
+}
+
+#pageHeader .floatLeft {
+	float: left;
+	position: relative;
+	width:20%;
+	height: 88px;
+	font-size: 11px;
+	margin-bottom: 2px;
+}
+
+#pageHeader .floatMiddle {
+	float: left;
+	width: 60%;
+	text-align: center;
+}
+
+#pageHeader .floatRight {
+	float: left;
+	position: relative;
+	width: 20%;
+	height: 90px;
+	text-align: right;
+}
+
+#pageHeader p {
+	margin: 0;
+	padding: 0;
+}
+
+#imgLinkedIn {
+	height: 60%;
+	width: 60%;
+}
+
+#backTo {
+	font-size: 13px;
+}
+
+#backTo:hover {
+	opacity: 0.8;
+}
+
+#backButton {
+	height: 2%;
+	width: 2%;
+}
+
+#titleHeader {
+	margin-bottom: 10px;
+}
+
+.tryItIcons {
+	height: 15px;
+	width: 15px;
+}
+
+#pageHR {
+	clear: both;
+}
+
+#footer {
+	clear: both;
+	width: 100%;
+	text-align: center;
+	font-size: 10px;
+	margin-bottom: 10px;
+}
+
+/***********************************/
+		#mainPhotoAndText {
+			align: auto;
+		}
+		
+		#mainPhotoAndText .floatLeft {
+			float: left;
+			width:50%;
+			height:400px;
+			margin-bottom: 10px;
+		}
+
+		#mainPhotoImg {
+			width: 300px;
+		}
+
+		p:first-child {
+			margin-top: 0px;
+		}
+
+		.imgIcons {
+			height: 100px;
+			width: 100px;
+		}
+
+		#icons {
+			text-align: center;
+		}
+
+		#icons .floatLeft {
+			float: left;
+			width: 50%;
+			margin-bottom: 10px;
+		}
+
+		.buttonContainer {
+            width: 150px;
+			margin: auto;
+		}

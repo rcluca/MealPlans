@@ -1,0 +1,16 @@
+﻿@{
+    WebMail.SmtpServer = "smtp.gmail.com";
+    WebMail.UserName = "thelucacompany@gmail.com";
+    WebMail.Password = "myNinja2014";
+    WebMail.From = "Meal Plans<thelucacompany@gmail.com>";
+    WebMail.EnableSsl = true;
+    WebMail.SmtpPort = 587;
+    
+    WebSecurity.InitializeDatabaseConnection(
+        "MealPlan",
+        "Users",
+        "ID",
+        "UserName",
+        autoCreateTables: true
+    );
+}

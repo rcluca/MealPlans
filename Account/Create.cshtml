@@ -1,0 +1,64 @@
+﻿@{
+    var email = Request["email"];
+    var username = Request["username"];
+    var password = Request["password"];
+    var passwordConfirm = Request["passwordConfirm"];
+
+    var db = Database.Open("MealPlan");
+
+    if (IsPost){
+        if(email.IsEmpty()){
+            ModelState.AddError("email", "Missing Email");
+        }
+        if(username.IsEmpty()){
+            ModelState.AddError("username", "Invalid Username");
+        }
+        if(password.IsEmpty()){
+            ModelState.AddError("password", "Invalid Password");
+        }
+        if(passwordConfirm != password){
+            ModelState.AddError("passwordConfirm", "Passwords do not match!");
+        }
+        if(ModelState.IsValid){
+            var token = WebSecurity.CreateUserAndAccount(
+                    username, password,
+                    requireConfirmationToken: true
+                );
+
+            var emailBody = EmailHelpers.NewUserConfirmation(username, token);
+
+            WebMail.Send(
+                to: email,
+                subject: "Meal Plans Account Verification",
+                body: emailBody.ToString(),
+                isBodyHtml: true
+            );
+
+            Response.Redirect("Welcome.cshtml");
+        }
+    }
+}
+
+<form method="post">
+    <p>
+        <label>Email</label>
+        <input type="email" name="email">
+    </p>
+    <p>
+        @Html.ValidationMessage("username", "*")
+        <label>Username</label>
+        <input type="text" name="username" value="@username">
+    </p>
+    <p>
+        @Html.ValidationMessage("password", "*")
+        <label>Password</label>
+        <input type="password" name="password">
+    </p>
+    <p>
+        @Html.ValidationMessage("passwordConfirm", "*")
+        <label>Confirm Password</label>
+        <input type="password" name="passwordConfirm">
+    </p>
+    <input type="submit" value="Create Account">
+
+</form>

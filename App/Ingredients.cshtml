@@ -1,0 +1,45 @@
+﻿@{
+    var db = Database.Open("MealPlan");
+    var ingredients = db.Query("SELECT Ingredient.Name AS Ingredient, IngredientCategoryLU.Name AS Category FROM Ingredient JOIN IngredientCategoryLU ON Ingredient.IngredientCategoryID = IngredientCategoryLU.ID ORDER BY Ingredient.Name");
+    var grid = new WebGrid(ingredients);
+    var categories = db.Query("SELECT * FROM IngredientCategoryLU ORDER BY Name");
+
+    var newIngredient = new {
+        Ingredient = Request["ingredient"],
+        Category = Request["category"]
+    };
+
+    var userID = WebSecurity.CurrentUserId;
+    var ingredientCategoryID = db.QueryValue("SELECT ID FROM IngredientCategoryLU WHERE Name = @0", newIngredient.Category);
+    var date = DateTime.Today;        
+
+    if(IsPost){
+        db.Execute("INSERT INTO Ingredient (Name, IngredientCategoryID, DateCreated, CreatedByID) VALUES (@0, @1, GETDATE(), @2);",
+        newIngredient.Ingredient, ingredientCategoryID, userID);
+
+        ingredients = db.Query("SELECT Ingredient.Name AS Ingredient, IngredientCategoryLU.Name AS Category FROM Ingredient JOIN IngredientCategoryLU ON Ingredient.IngredientCategoryID = IngredientCategoryLU.ID ORDER BY Ingredient.Name");
+        grid = new WebGrid(ingredients);
+    }
+}
+
+<form method="post">
+    <p>
+        <label for="ingredient">Ingredient</label>
+        <input type="text" name="ingredient">
+    </p>
+    <p>
+        <label for="category">Category</label>
+        <select name="category">
+            @foreach(var category in categories){
+                <option>@category.Name</option>
+            }
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="Add Ingredient">
+    </p>
+</form>
+<h1>Available Ingredients</h1>
+<div>
+    @grid.GetHtml()
+</div>

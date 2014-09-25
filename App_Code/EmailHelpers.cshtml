@@ -1,0 +1,9 @@
+﻿@helper NewUserConfirmation(string username, string token){
+    var relativeUrl = "~/Account/Confirm.cshtml?token=" + token;
+    var absoluteUrl = VirtualPathUtility.ToAbsolute(relativeUrl);
+    var verificationUrl = "http://" + Request.Url.Authority + absoluteUrl;
+
+    <h1>Welcome to your personal meal planner!</h1>
+    <p>Please click the following link to verify and begin using your new account.</p>
+    <p><a href="@verificationUrl">Verify Your Account</a></p>
+}

@@ -1,0 +1,18 @@
+﻿@{
+    var db = Database.Open("MealPlan");
+    var ingredients = db.Query("SELECT Ingredient.Name AS Ingredient, IngredientCategoryLU.Name AS Category FROM Ingredient JOIN IngredientCategoryLU ON Ingredient.IngredientCategoryID = IngredientCategoryLU.ID ORDER BY IngredientCategoryLU.Name, Ingredient.Name");
+    var meals = db.Query("SELECT Name AS Meal FROM Meal ORDER BY Name");
+    var gridIngredients = new WebGrid(ingredients);
+    var gridMeals = new WebGrid(meals);
+}
+
+<h1>Available Meals</h1>
+<div>
+    @gridMeals.GetHtml()
+</div>
+<p><a href="~/App/Meals.cshtml">Enter Meals</a></p>
+<h1>Available Ingredients</h1>
+<div>
+    @gridIngredients.GetHtml()
+</div>
+<p><a href="~/App/Ingredients.cshtml">Enter Ingredients</a></p>

@@ -1,0 +1,49 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="@Href("~/Styles/StyleSheet.css")">
+	<link rel="stylesheet" type="text/css" href="@Href("~/References/jquery-ui-1.10.4.custom.css")">
+	<script src="~/References/jquery-1.11.0.min.js"></script>
+	<script src="~/References/jquery-ui-1.10.4.custom.min.js"></script>
+	<title>Main</title>
+    @RenderSection("Header", false)
+</head>
+<body>
+<div id="center">
+
+	<div id="pageHeader">
+		<div class="floatLeft">
+			<div class="textBottomLeft">
+
+			</div>
+		</div>
+		<div class="floatMiddle">
+			<a href="@Href("~/Default.cshtml")">
+			<img src="~/Images/NameLogo.jpg" alt="Hello">
+			</a>
+		</div>
+		<div class="floatRight">
+			<div class="textBottomRight">
+
+			</div>
+		</div>
+	</div>
+
+	<hr id="pageHR">
+    
+    @RenderBody()
+
+	<hr id="pageHR">
+
+	<div>
+		<p id="footer">100% Developed by Raul C Luca, Copyright 2014</p>
+	</div>
+
+</div>
+</body>
+</html>

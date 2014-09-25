@@ -1,0 +1,28 @@
+﻿@{
+    var username = Request["username"];
+    var password = Request["password"];
+
+    if(IsPost){
+        var loggedIn = WebSecurity.Login(username, password);
+
+        if(loggedIn){
+            Response.Redirect("~/App/HomePage.cshtml");
+        }
+    }
+}
+
+<h1>Account Login</h1>
+<form method="post">
+    <p>
+        <label>Username</label>
+        <input type="text" name="username" value="@username">
+    </p>
+    <p>
+        <label>Password</label>
+        <input type="password" name="password">
+    </p>
+    <p>
+        <input type="submit" value="Login">
+    </p>
+</form>
+<p>New User? <a href="~/Account/Create.cshtml">Create Account</a></p>

@@ -1,0 +1,121 @@
+﻿@{
+    var db = Database.Open("MealPlan");
+    var mealTypes = db.Query("SELECT Name FROM MealTypeLU ORDER BY ID");
+    var ingredients = db.Query("SELECT Name FROM Ingredient ORDER BY Name");
+    var measurements = db.Query("SELECT Name FROM MeasurementLU ORDER BY Name");
+
+    var nutritionType = Request["nutritionType"];
+    if(IsPost){
+         var temp = Request["nutritionType"].Split(new[]{','}, StringSplitOptions.RemoveEmptyEntries);
+    }
+}
+
+@section header {
+    <style>
+        #preparationTextArea {
+            width: 450px;
+            max-width: 450px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#addIngredient").click(function () {
+                $(".ingredient:last").clone().insertBefore("#addRemoveIngredient");
+            });
+
+            $("#removeIngredient").click(function () {
+                if ($(".ingredient").length > 1) {
+                    $(".ingredient:last").remove();
+                }
+            });
+        });
+    </script>
+}
+
+<form method="post">
+    <p>
+        <label for="meal">Meal</label>
+        <input type="text" name="meal">
+        <label for="mealType">Meal Type</label>
+        <select name="mealType">
+            @foreach(var mealType in mealTypes){
+                <option>@mealType.Name</option>
+            }
+        </select>
+    </p>
+    <h3>Enter Ingredients</h3>
+    <table>
+        <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+        </tr>
+        <tr class="ingredient">
+            <td>
+                <select name="ingredientName">
+                <option>Pick an Ingredient</option>
+                @foreach(var ingredient in ingredients){
+                    <option>@ingredient.Name</option>
+                }
+                </select>
+            </td>
+            <td>
+                <input type="text" name="ingredientQuantity">
+            </td>
+            <td>
+                <select name="ingredientMeasurement">
+                <option>Choose Measurement</option>
+                <option>No Measurement</option>
+                @foreach(var measurement in measurements){
+                    <option>@measurement.Name</option>
+                }
+                </select>
+            </td>
+        </tr>
+        <tr id="addRemoveIngredient">
+            <td>
+                <button type="button" name="addIngredient" id="addIngredient">Add Another Ingredient</button>
+            </td>
+            <td>
+                <button type="button" name="removeIngredient" id="removeIngredient">Remove Last Ingredient</button>
+            </td>
+        </tr>
+    </table>
+    <h3>Enter Preparation Instructions</h3>
+    <p>
+        <textarea rows="5" maxlength="4000" name="preparation" id="preparationTextArea"></textarea>
+    </p>
+    <h3>Enter Nutrition</h3>
+    <table>
+        <tr>
+            <th>Nutrition Type</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+        </tr>
+        @RenderPage("Meals_PartialNutrition.cshtml", new {
+            defaultNutritionType = "Calorie",
+            defaultNutritionMeasurement = "No Measurement"
+        })
+        @RenderPage("Meals_PartialNutrition.cshtml", new {
+            defaultNutritionType = "Protein",
+            defaultNutritionMeasurement = "Gram"
+        })
+        @RenderPage("Meals_PartialNutrition.cshtml", new {
+            defaultNutritionType = "Carbohydrate",
+            defaultNutritionMeasurement = "Gram"
+        })
+        @RenderPage("Meals_PartialNutrition.cshtml", new {
+            defaultNutritionType = "Fat",
+            defaultNutritionMeasurement = "Gram"
+        })
+        @RenderPage("Meals_PartialNutrition.cshtml", new {
+            defaultNutritionType = "Fiber",
+            defaultNutritionMeasurement = "Gram"
+        })
+    </table>
+    <p>
+        <input type="submit" value="Create Meal">
+    </p>
+</form>
+
+<div>@nutritionType</div>

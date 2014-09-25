@@ -1,0 +1,32 @@
+﻿@{
+    var db = Database.Open("MealPlan");
+    var measurements = db.Query("SELECT Name FROM MeasurementLU ORDER BY Name");
+    var nutrients = db.Query("SELECT * FROM MealNutritionTypeLU ORDER BY Name");
+
+}
+
+<tr>
+    <td>
+        <select name="nutritionType">
+        @foreach(var nutrient in nutrients){
+            if(nutrient.Name == PageData["defaultNutritionType"]){
+                <option selected="selected">@nutrient.Name</option>
+            }
+            else {
+                <option>@nutrient.Name</option>
+            }
+        }
+        </select>
+    </td>
+    <td>
+        <input type="text" name="nutritionQuantity">
+    </td>
+    <td>
+        <select name="nutritionMeasurement">
+        <option selected="selected">@PageData["defaultNutritionMeasurement"]</option>
+        @foreach(var measurement in measurements){
+            <option>@measurement.Name</option>
+        }
+        </select>
+    </td>
+</tr>
